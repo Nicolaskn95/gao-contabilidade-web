@@ -44,13 +44,13 @@ export function Hero() {
     video.addEventListener('loadeddata', handleVideoLoad)
     video.addEventListener('canplay', handleVideoCanPlay)
 
-    // Timeout de segurança - se o vídeo não carregar em 5 segundos, mostra imagem estática
+    // Timeout de segurança - se o vídeo não carregar em 10 segundos, mostra imagem estática
     const timeoutId = setTimeout(() => {
       if (!showStaticImage) {
         console.log('Timeout: mostrando imagem estática')
         setShowStaticImage(true)
       }
-    }, 5000)
+    }, 10000)
 
     // Tentar reproduzir o vídeo
     const playVideo = async () => {
@@ -109,6 +109,12 @@ export function Hero() {
         {/* Overlay com gradiente */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-secondary/90" aria-hidden="true" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" aria-hidden="true" />
+        
+        {/* Múltiplas camadas de gradiente para transição sutil */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white via-white/20 to-transparent" aria-hidden="true" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white/60 via-white/10 to-transparent" aria-hidden="true" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/40 via-white/5 to-transparent" aria-hidden="true" />
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-muted/30 to-transparent" aria-hidden="true" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
