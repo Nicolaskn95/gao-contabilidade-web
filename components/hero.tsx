@@ -107,8 +107,8 @@ export function Hero() {
         )}
         
         {/* Overlay com gradiente */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-secondary/90" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-secondary/90" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" aria-hidden="true" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
@@ -119,7 +119,7 @@ export function Hero() {
               <div className="space-y-10">
                 <div className="inline-block">
                   <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20">
-                    <div className="w-3 h-3 bg-secondary rounded-full animate-pulse" />
+                    <div className="w-3 h-3 bg-secondary rounded-full animate-pulse" aria-hidden="true" />
                     <span className="text-sm font-medium text-white">Soluções Contábeis Completas</span>
                   </div>
                 </div>
