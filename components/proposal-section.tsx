@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CheckCircle2, ArrowRight } from "lucide-react"
 import { useState } from "react"
 
@@ -21,6 +22,10 @@ export function ProposalSection() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSelectChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, funcionarios: value }))
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -148,17 +153,19 @@ Aguardo retorno. Obrigado!`
 
                     <div>
                       <Label htmlFor="funcionarios">Número de Funcionários Atual *</Label>
-                      <Input
-                        id="funcionarios"
-                        name="funcionarios"
-                        type="number"
-                        required
-                        value={formData.funcionarios}
-                        onChange={handleInputChange}
-                        placeholder="Ex: 10"
-                        className="mt-1"
-                        min="0"
-                      />
+                      <Select value={formData.funcionarios} onValueChange={handleSelectChange} required>
+                        <SelectTrigger className="mt-1 w-full">
+                          <SelectValue placeholder="Selecione o número de funcionários" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="1 a 5">1 a 5 funcionários</SelectItem>
+                          <SelectItem value="6 a 10">6 a 10 funcionários</SelectItem>
+                          <SelectItem value="11 a 20">11 a 20 funcionários</SelectItem>
+                          <SelectItem value="21 a 50">21 a 50 funcionários</SelectItem>
+                          <SelectItem value="51 a 100">51 a 100 funcionários</SelectItem>
+                          <SelectItem value="acima de 100">Acima de 100 funcionários</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <Button
@@ -177,22 +184,6 @@ Aguardo retorno. Obrigado!`
                 </div>
               </div>
 
-              <div className="border-t border-border pt-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                  <div>
-                    <div className="text-3xl font-bold text-primary mb-2">500+</div>
-                    <p className="text-sm text-muted-foreground">Empresas Atendidas</p>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-primary mb-2">15+</div>
-                    <p className="text-sm text-muted-foreground">Anos de Experiência</p>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-primary mb-2">98%</div>
-                    <p className="text-sm text-muted-foreground">Satisfação dos Clientes</p>
-                  </div>
-                </div>
-              </div>
             </CardContent>
           </Card>
 
