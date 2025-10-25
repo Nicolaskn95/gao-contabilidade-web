@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
       <Hero />
       <Services />
-      <Clients />
+      {/* <Clients /> */}
       <ProposalSection />
       <Footer />
       <WhatsAppWidget />
