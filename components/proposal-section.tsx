@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CheckCircle2, ArrowRight } from "lucide-react"
 import { useState } from "react"
+import { trackWhatsAppClick } from "@/lib/gtag"
 
 export function ProposalSection() {
   const [formData, setFormData] = useState({
@@ -30,6 +31,11 @@ export function ProposalSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    trackWhatsAppClick("Formulário de Proposta", {
+      empresa: formData.empresa,
+      funcionarios: formData.funcionarios,
+    })
 
     const whatsappNumber = "5515996890947"
     const message = `Olá! Gostaria de solicitar uma proposta de serviços contábeis.

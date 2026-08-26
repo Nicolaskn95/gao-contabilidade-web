@@ -1,5 +1,8 @@
+"use client"
+
 import { Instagram, Mail, Phone, Facebook } from "lucide-react"
 import Image from "next/image"
+import { trackWhatsAppClick } from "@/lib/gtag"
 
 export function Footer() {
   return (
@@ -27,7 +30,11 @@ export function Footer() {
             <div className="space-y-2 text-sm opacity-90">
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />
-                <a href="tel:+5515996890947" className="hover:opacity-100 transition-opacity">
+                <a 
+                  href="tel:+5515996890947" 
+                  onClick={() => trackWhatsAppClick("Telefone Rodapé")}
+                  className="hover:opacity-100 transition-opacity"
+                >
                   (15) 99689-0947
                 </a>
               </div>

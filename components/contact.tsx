@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import { Mail, Phone, MapPin, Send } from "lucide-react"
+import { trackWhatsAppClick } from "@/lib/gtag"
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -19,7 +20,11 @@ export function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const whatsappNumber = "5511999999999" // Substitua pelo número real
+    trackWhatsAppClick("Formulário de Contato", {
+      contact_name: formData.name,
+      contact_email: formData.email,
+    })
+    const whatsappNumber = "5515996890947"
     const message = `Olá! Meu nome é ${formData.name}.\n\nEmail: ${formData.email}\nTelefone: ${formData.phone}\n\nMensagem: ${formData.message}`
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, "_blank")
