@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
 export function Hero() {
@@ -133,18 +134,16 @@ export function Hero() {
                 </p>
               </div>
 
-              {/* Botão de Ação */}
               <div className="flex justify-start">
                 <Button
+                  asChild
                   size="lg"
                   variant="outline"
-                  onClick={() => {
-                    const element = document.getElementById("servicos")
-                    if (element) element.scrollIntoView({ behavior: "smooth" })
-                  }}
-                  className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 text-base px-8 py-4 shadow-xl hover:shadow-2xl transition-all duration-300"
+                  className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-[var(--color-gao-gold)] hover:text-[#024D44] hover:border-[var(--color-gao-gold)] text-base px-8 py-4 shadow-xl hover:shadow-2xl transition-all duration-300 font-bold"
                 >
-                  Conheça Nossos Serviços
+                  <Link href="/#servicos">
+                    Conheça nossos serviços
+                  </Link>
                 </Button>
               </div>
             </div>

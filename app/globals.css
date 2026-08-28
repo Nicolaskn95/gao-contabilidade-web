@@ -112,6 +112,12 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* GAO Colors */
+  --color-gao-green: #024D44;
+  --color-gao-gold: #EDBD53;
+  --color-gao-sage: #C8D8B8;
+  --color-gao-nude: #E8D8C8;
 }
 
 @layer base {

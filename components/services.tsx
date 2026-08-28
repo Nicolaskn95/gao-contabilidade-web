@@ -1,71 +1,66 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { Calculator, FileText, TrendingUp, Users, Building2, Shield } from "lucide-react"
+import { Calculator, Receipt, Users, Briefcase, TrendingUp, User } from "lucide-react"
+import Link from "next/link"
 
 const services = [
   {
     icon: Calculator,
     title: "Contabilidade Geral",
-    description: "Escrituração contábil completa, balanços patrimoniais e demonstrações financeiras para sua empresa.",
+    slug: "contabilidade-geral",
   },
   {
-    icon: FileText,
-    title: "Assessoria Fiscal",
-    description:
-      "Planejamento tributário estratégico e gestão de obrigações fiscais para otimizar sua carga tributária.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Consultoria Financeira",
-    description: "Análise de indicadores financeiros e consultoria para tomada de decisões estratégicas.",
+    icon: Receipt,
+    title: "Fiscal",
+    slug: "fiscal",
   },
   {
     icon: Users,
     title: "Departamento Pessoal",
-    description: "Gestão completa de folha de pagamento, encargos trabalhistas e benefícios.",
+    slug: "departamento-pessoal",
   },
   {
-    icon: Building2,
-    title: "Abertura de Empresas",
-    description: "Assessoria completa para constituição de empresas, escolha do regime tributário ideal e registro.",
+    icon: Briefcase,
+    title: "Legalização Societária",
+    slug: "legalizacao-societaria",
   },
   {
-    icon: Shield,
-    title: "Compliance & Auditoria",
-    description: "Garantia de conformidade legal e auditoria interna para segurança do seu negócio.",
+    icon: TrendingUp,
+    title: "Consultoria Tributária",
+    slug: "consultoria-tributaria",
+  },
+  {
+    icon: User,
+    title: "Pessoa Física",
+    slug: "pessoa-fisica",
   },
 ]
 
 export function Services() {
   return (
-    <section id="servicos" className="py-24 bg-muted/30">
+    <section id="servicos" className="py-24 bg-white">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="inline-block mb-4">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Nossos Serviços</span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            Soluções Completas para Seu Negócio
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#024D44] mb-4">
+            Serviços
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-            Oferecemos uma gama completa de serviços contábeis e de assessoria para empresas de todos os segmentos e
-            portes.
-          </p>
+          <div className="w-20 h-1 bg-[var(--color-gao-gold)] mx-auto rounded-full"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
-            <Card
-              key={index}
-              className="group hover:shadow-lg transition-all duration-300 border-border hover:border-primary/50"
-            >
-              <CardContent className="p-6">
-                <div className="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  <service.icon className="h-7 w-7" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">{service.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-              </CardContent>
-            </Card>
+            <Link href={`/servicos/${service.slug}`} key={index} className="block group">
+              <Card className="h-full border border-border/50 bg-muted/20 hover:border-[var(--color-gao-gold)] transition-colors shadow-none hover:shadow-md">
+                <CardContent className="p-8 flex flex-col items-center text-center">
+                  <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#024D44]/10 text-[#024D44] group-hover:bg-[#024D44] group-hover:text-white transition-colors">
+                    <service.icon className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground mb-3">{service.title}</h3>
+                  <p className="text-sm text-[var(--color-gao-gold)] font-bold mt-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                    Saiba mais &rarr;
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>

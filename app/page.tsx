@@ -1,6 +1,11 @@
 import { Hero } from "@/components/hero"
+import { Pilares } from "@/components/pilares"
+import { Diferenciais } from "@/components/diferenciais"
 import { Services } from "@/components/services"
-import { Clients } from "@/components/clients"
+import { Segmentos } from "@/components/segmentos"
+import { QuemSomosResumo } from "@/components/quem-somos-resumo"
+import { EquipeResumo } from "@/components/equipe-resumo"
+import { ReformaTributariaDestaque } from "@/components/reforma-tributaria-destaque"
 import { ProposalSection } from "@/components/proposal-section"
 import { WhatsAppWidget } from "@/components/whatsapp-widget"
 import { Header } from "@/components/header"
@@ -11,8 +16,13 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <Hero />
+      <Pilares />
+      <Diferenciais />
       <Services />
-      <Clients />
+      <Segmentos />
+      <QuemSomosResumo />
+      <EquipeResumo />
+      <ReformaTributariaDestaque />
       <ProposalSection />
       <Footer />
       <WhatsAppWidget />

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -17,14 +18,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-      setIsMobileMenuOpen(false)
-    }
-  }
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -33,7 +26,7 @@ export function Header() {
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/brand-ic47XtwwKqKzDBVVYDPoprVmkhlRGO.jpg"
               alt="GAO Logo"
@@ -53,47 +46,69 @@ export function Header() {
                 Contabilidade & Assessoria
               </div>
             </div>
-          </div>
+          </Link>
 
           <nav className="hidden md:flex items-center gap-8">
-            <button
-              onClick={() => scrollToSection("inicio")}
-              className={`text-sm font-medium transition-all duration-300 hover:bg-accent px-3 py-2 rounded-md ${
+            <Link
+              href="/"
+              className={`text-sm font-medium transition-all duration-300 hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md ${
                 isScrolled 
-                  ? "text-foreground hover:text-accent-foreground" 
-                  : "text-white hover:text-white/80 drop-shadow-md"
+                  ? "text-foreground" 
+                  : "text-white drop-shadow-md"
               }`}
             >
-              Início
-            </button>
-            <button
-              onClick={() => scrollToSection("servicos")}
-              className={`text-sm font-medium transition-all duration-300 hover:bg-accent px-3 py-2 rounded-md ${
+              Home
+            </Link>
+            <Link
+              href="/#servicos"
+              className={`text-sm font-medium transition-all duration-300 hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md ${
                 isScrolled 
-                  ? "text-foreground hover:text-accent-foreground" 
-                  : "text-white hover:text-white/80 drop-shadow-md"
+                  ? "text-foreground" 
+                  : "text-white drop-shadow-md"
               }`}
             >
               Serviços
-            </button>
-            <button
-              onClick={() => scrollToSection("clientes")}
-              className={`text-sm font-medium transition-all duration-300 hover:bg-accent px-3 py-2 rounded-md ${
+            </Link>
+            <Link
+              href="/quem-somos"
+              className={`text-sm font-medium transition-all duration-300 hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md ${
                 isScrolled 
-                  ? "text-foreground hover:text-accent-foreground" 
-                  : "text-white hover:text-white/80 drop-shadow-md"
+                  ? "text-foreground" 
+                  : "text-white drop-shadow-md"
               }`}
             >
-              Clientes
-            </button>
+              Quem Somos
+            </Link>
+            <Link
+              href="/equipe"
+              className={`text-sm font-medium transition-all duration-300 hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md ${
+                isScrolled 
+                  ? "text-foreground" 
+                  : "text-white drop-shadow-md"
+              }`}
+            >
+              Equipe
+            </Link>
+            <Link
+              href="/reforma-tributaria"
+              className={`text-sm font-medium transition-all duration-300 hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md ${
+                isScrolled 
+                  ? "text-[var(--color-gao-green)] font-bold" 
+                  : "text-[var(--color-gao-gold)] font-bold drop-shadow-md"
+              }`}
+            >
+              Reforma Tributária
+            </Link>
           </nav>
 
           <div className="hidden md:block">
             <Button
-              onClick={() => scrollToSection("proposta")}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              asChild
+              className="bg-[var(--color-gao-gold)] hover:bg-[var(--color-gao-gold)]/90 text-[var(--color-gao-green)] font-bold"
             >
-              Solicitar Proposta
+              <Link href="/#proposta">
+                Solicitar proposta
+              </Link>
             </Button>
           </div>
 
@@ -108,31 +123,50 @@ export function Header() {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border">
-            <nav className="flex flex-col gap-4">
-              <button
-                onClick={() => scrollToSection("inicio")}
-                className="text-left text-sm font-medium text-foreground hover:text-accent-foreground hover:bg-accent px-3 py-2 rounded-md transition-all"
+          <div className="md:hidden py-4 border-t border-border bg-background/95 backdrop-blur-md absolute left-0 right-0 top-20 shadow-md">
+            <nav className="flex flex-col gap-4 px-4">
+              <Link
+                href="/"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-sm font-medium text-foreground hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md transition-all"
               >
-                Início
-              </button>
-              <button
-                onClick={() => scrollToSection("servicos")}
-                className="text-left text-sm font-medium text-foreground hover:text-accent-foreground hover:bg-accent px-3 py-2 rounded-md transition-all"
+                Home
+              </Link>
+              <Link
+                href="/#servicos"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-sm font-medium text-foreground hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md transition-all"
               >
                 Serviços
-              </button>
-              <button
-                onClick={() => scrollToSection("clientes")}
-                className="text-left text-sm font-medium text-foreground hover:text-accent-foreground hover:bg-accent px-3 py-2 rounded-md transition-all"
+              </Link>
+              <Link
+                href="/quem-somos"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-sm font-medium text-foreground hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md transition-all"
               >
-                Clientes
-              </button>
+                Quem Somos
+              </Link>
+              <Link
+                href="/equipe"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-sm font-medium text-foreground hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md transition-all"
+              >
+                Equipe
+              </Link>
+              <Link
+                href="/reforma-tributaria"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left text-sm font-bold text-[var(--color-gao-green)] hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md transition-all"
+              >
+                Reforma Tributária
+              </Link>
               <Button
-                onClick={() => scrollToSection("proposta")}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground w-full"
+                asChild
+                className="bg-[var(--color-gao-gold)] hover:bg-[var(--color-gao-gold)]/90 text-[var(--color-gao-green)] font-bold w-full mt-4"
               >
-                Solicitar Proposta
+                <Link href="/#proposta" onClick={() => setIsMobileMenuOpen(false)}>
+                  Solicitar proposta
+                </Link>
               </Button>
             </nav>
           </div>

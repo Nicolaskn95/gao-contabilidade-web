@@ -1,0 +1,108 @@
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
+import { WhatsAppWidget } from "@/components/whatsapp-widget"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+export default function EquipePage() {
+  const equipe = [
+    {
+      name: "Gisele Alves",
+      role: "CEO | Contadora Responsável",
+      experience: "+ de 14 anos de experiência",
+      formation: "Ciências Contábeis · MBA em Controladoria de Empresas",
+      description: "Contadora com mais de 14 anos de experiência e MBA em Controladoria de Empresas. À frente da gestão da GAO, atua na condução estratégica do escritório, no relacionamento com clientes e no acompanhamento das necessidades empresariais, buscando oferecer uma assessoria próxima e integrada.",
+      specialties: "Gestão contábil e empresarial · Controladoria · Gestão e estruturação de processos · Atendimento e relacionamento com clientes · Assessoria contábil empresarial",
+      initials: "GA"
+    },
+    {
+      name: "Isabela Gonzales",
+      role: "Especialista Fiscal e Consultora Tributária",
+      experience: "+ de 11 anos de experiência",
+      formation: "Ciências Contábeis · duas pós-graduações em Direito Tributário · pós-graduação em Reforma Tributária (em andamento)",
+      description: "Profissional com mais de 11 anos de experiência nas áreas fiscal e tributária, com formação em Ciências Contábeis e duas pós-graduações em Direito Tributário. Atua em consultoria e planejamento tributário, compliance, regularização fiscal e análise estratégica das operações, com especialização voltada aos impactos e à implementação da Reforma Tributária.",
+      specialties: "Consultoria e planejamento tributário · Reforma Tributária · Compliance e revisão tributária · Regularização fiscal e transação tributária · Tributação de operações · Planejamento e reorganização societária com foco tributário",
+      initials: "IG"
+    },
+    {
+      name: "Amanda Carolini",
+      role: "Responsável por Legalização Societária",
+      experience: "+ de 8 anos de experiência",
+      formation: "A confirmar",
+      description: "Profissional com mais de 8 anos de experiência em legalização societária, atuando em processos de constituição, alteração, regularização e encerramento de empresas, além do acompanhamento de registros, inscrições e procedimentos perante os órgãos competentes.",
+      specialties: "Constituição e abertura de empresas · Alterações contratuais e societárias · Regularização cadastral · Inscrições e licenças · Baixa e encerramento de empresas · Processos perante órgãos de registro e fiscalização",
+      initials: "AC"
+    },
+    {
+      name: "Fernanda Massone",
+      role: "Responsável pelo Departamento Pessoal",
+      experience: "+ de 10 anos de experiência",
+      formation: "A confirmar",
+      description: "Profissional com mais de 10 anos de experiência em Departamento Pessoal, com atuação em folha de pagamento, cálculos e obrigações trabalhistas, eSocial, regularização de vínculos e atendimento a fiscalizações. Possui também experiência no tratamento de rotinas decorrentes de reclamatórias trabalhistas.",
+      specialties: "Folha de pagamento e encargos · Admissões, férias e rescisões · eSocial e obrigações trabalhistas · Cálculos trabalhistas · Regularização de vínculos · Reclamatórias trabalhistas e seus reflexos em folha · Atendimento a fiscalizações",
+      initials: "FM"
+    },
+    {
+      name: "Viviane Lucena",
+      role: "Responsável pelo Departamento Contábil",
+      experience: "+ de 6 anos de experiência",
+      formation: "Ciências Contábeis · MBA em Contabilidade, Compliance & Direito Tributário",
+      description: "Profissional com mais de 6 anos de experiência na área contábil, com atuação em escrituração, conciliações, fechamento e elaboração e análise de demonstrações contábeis. Possui experiência na implantação e melhoria de processos, com foco em conformidade, qualidade das informações e eficiência das rotinas contábeis.",
+      specialties: "Escrituração e fechamento contábil · Conciliações contábeis · Demonstrações contábeis e financeiras · Análise de demonstrativos · Obrigações acessórias contábeis · Implantação e melhoria de processos contábeis",
+      initials: "VL"
+    }
+  ]
+
+  return (
+    <main className="min-h-screen bg-muted/30">
+      <Header />
+      
+      {/* Hero Equipe */}
+      <section className="pt-32 pb-16 bg-[#024D44] text-white">
+        <div className="container mx-auto px-4 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-gao-gold)] mb-6">
+            Nossa Equipe
+          </h1>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed opacity-90">
+            Conheça os profissionais que dedicam conhecimento e experiência para transformar números em estratégia para o seu negócio.
+          </p>
+        </div>
+      </section>
+
+      {/* Lista de Membros */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-5xl mx-auto space-y-12">
+            {equipe.map((membro, index) => (
+              <div key={index} className="bg-white rounded-3xl p-8 md:p-10 border border-border/50 shadow-sm flex flex-col md:flex-row gap-10 items-start">
+                <Avatar className="w-32 h-32 border-4 border-muted shrink-0">
+                  <AvatarImage src={`/equipe-${index}.jpg`} alt={membro.name} />
+                  <AvatarFallback className="bg-[#024D44] text-white text-3xl font-bold">{membro.initials}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <h2 className="text-3xl font-bold text-foreground mb-2">{membro.name}</h2>
+                  <div className="flex flex-wrap items-center gap-2 mb-4">
+                    <span className="font-semibold text-[#024D44] text-lg">{membro.role}</span>
+                    <span className="text-muted-foreground hidden md:inline">•</span>
+                    <span className="text-sm font-bold text-[var(--color-gao-gold)]">{membro.experience}</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-6 font-medium">
+                    <span className="text-foreground">Formação:</span> {membro.formation}
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    {membro.description}
+                  </p>
+                  <p className="text-sm font-medium text-foreground bg-muted/50 p-4 rounded-xl">
+                    <span className="text-[#024D44] font-bold">Especialidades:</span> {membro.specialties}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+      <WhatsAppWidget />
+    </main>
+  )
+}

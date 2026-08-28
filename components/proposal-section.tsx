@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -59,34 +58,26 @@ Aguardo retorno. Obrigado!`
   return (
     <section
       id="proposta"
-      className="py-24 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative overflow-hidden"
+      className="py-24 bg-gradient-to-br from-[#024D44]/5 via-white to-[var(--color-gao-gold)]/10 relative overflow-hidden"
     >
-      {/* Decorative elements */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-block mb-4">
-              <span className="text-sm font-semibold text-primary uppercase tracking-wider">Sem Compromisso</span>
+              <span className="text-sm font-bold text-[var(--color-gao-gold)] uppercase tracking-wider">Sem Compromisso</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 text-balance">Solicite uma Proposta</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-              Temos uma assessoria especializada no bom desempenho e no crescimento da sua empresa.
-            </p>
+            <h2 className="text-3xl md:text-5xl font-bold text-[#024D44] mb-4 text-balance">Solicite uma proposta</h2>
           </div>
 
-          <Card className="border-2 border-primary/20 shadow-xl">
+          <Card className="border border-border/50 shadow-xl bg-white/80 backdrop-blur-sm">
             <CardContent className="p-8 md:p-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground mb-6">O que está incluído na proposta:</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-6">O que está incluído na proposta:</h3>
                   <ul className="space-y-4">
                     {benefits.map((benefit, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
+                        <CheckCircle2 className="h-6 w-6 text-[#024D44] flex-shrink-0 mt-0.5" />
                         <span className="text-muted-foreground leading-relaxed">{benefit}</span>
                       </li>
                     ))}
@@ -171,9 +162,9 @@ Aguardo retorno. Obrigado!`
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full bg-accent hover:bg-accent/90 text-accent-foreground text-lg py-6"
+                      className="w-full bg-[var(--color-gao-gold)] hover:bg-[var(--color-gao-gold)]/90 text-[#024D44] font-bold text-lg py-6 mt-4"
                     >
-                      Enviar Proposta via WhatsApp
+                      Enviar proposta via WhatsApp
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
 
@@ -183,16 +174,8 @@ Aguardo retorno. Obrigado!`
                   </form>
                 </div>
               </div>
-
             </CardContent>
           </Card>
-
-          <div className="mt-8 text-center">
-            <p className="text-sm text-muted-foreground">
-              Já atendemos empresas de diversos segmentos: indústrias, comércios, prestadores de serviços, clínicas
-              médicas, profissionais liberais e holdings familiares.
-            </p>
-          </div>
         </div>
       </div>
     </section>
