@@ -16,7 +16,6 @@ export function Hero() {
       element.scrollIntoView({ behavior: "smooth" })
     }
   }
-
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
@@ -39,19 +38,11 @@ export function Hero() {
       console.log('Vídeo pode começar a reproduzir')
     }
 
-    // Adicionar todos os event listeners
+    // Adicionar event listeners
     video.addEventListener('ended', handleVideoEnd)
     video.addEventListener('error', handleVideoError)
     video.addEventListener('loadeddata', handleVideoLoad)
     video.addEventListener('canplay', handleVideoCanPlay)
-
-    // Timeout de segurança - se o vídeo não carregar em 5 segundos, mostra imagem estática
-    const timeoutId = setTimeout(() => {
-      if (!showStaticImage) {
-        console.log('Timeout: mostrando imagem estática')
-        setShowStaticImage(true)
-      }
-    }, 5000)
 
     // Tentar reproduzir o vídeo
     const playVideo = async () => {
@@ -68,7 +59,6 @@ export function Hero() {
     setTimeout(playVideo, 100)
 
     return () => {
-      clearTimeout(timeoutId)
       video.removeEventListener('ended', handleVideoEnd)
       video.removeEventListener('error', handleVideoError)
       video.removeEventListener('loadeddata', handleVideoLoad)
@@ -96,7 +86,7 @@ export function Hero() {
           </video>
         )}
         
-        {/* Imagem estática - mostra quando o vídeo termina ou em caso de erro */}
+        {/* Imagem estática - mostra em caso de erro */}
         {showStaticImage && (
           <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/landing-page-Br8LJbU41IBRjz1MPy1w9AFwM0pyJh.jpg"
