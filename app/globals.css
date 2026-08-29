@@ -128,3 +128,71 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Botão Solicitar Proposta */
+.btn-proposta {
+  position: relative;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 9999px;
+  cursor: pointer;
+  border: none;
+  background: var(--color-gao-green);
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-proposta span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  color: var(--color-gao-green);
+}
+
+.btn-proposta:hover span {
+  color: white;
+}
+
+.btn-proposta svg {
+  width: 1.2em;
+  height: 1.2em;
+  margin-left: 0.5em;
+  transition: transform 0.3s;
+}
+
+.btn-proposta:hover svg {
+  transform: translateX(4px);
+}
+
+.btn-proposta::before,
+.btn-proposta::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.btn-proposta::before {
+  content: "";
+  background: var(--color-gao-gold);
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.btn-proposta:hover::before {
+  transform: translate3d(100%, 0, 0);
+}
+
+.btn-proposta:active {
+  transform: scale(0.95);
+}

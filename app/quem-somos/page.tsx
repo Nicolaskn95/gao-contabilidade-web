@@ -1,3 +1,6 @@
+"use client"
+
+import { useEffect, useRef } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppWidget } from "@/components/whatsapp-widget"
@@ -13,6 +16,41 @@ export default function QuemSomosPage() {
     { nome: "Atualização constante", desc: "acompanhamento contínuo das mudanças contábeis, fiscais, tributárias e empresariais." },
     { nome: "Proximidade", desc: "relacionamento próximo e consultivo, baseado no conhecimento de cada negócio." },
   ]
+  const timeline = [
+    {
+      date: "O Início",
+      title: "Fundação da GAO",
+      text: "Nascemos com o propósito de oferecer uma contabilidade diferente do modelo tradicional, focando na proximidade com o empresário."
+    },
+    {
+      date: "Evolução",
+      title: "Atuação Consultiva",
+      text: "Passamos a unir conhecimento técnico e tecnologia para entregar soluções nas áreas contábil, fiscal, trabalhista, societária e tributária."
+    },
+    {
+      date: "Atualmente",
+      title: "Parceria Estratégica",
+      text: "Hoje, mais do que cumprir obrigações, compreendemos cada empresa para atuar como parceiros reais na gestão e no crescimento dos negócios."
+    }
+  ]
+
+  const observerRef = useRef<IntersectionObserver | null>(null)
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.setAttribute('data-visible', 'true')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.2 })
+
+    const elements = document.querySelectorAll('.timeline-item')
+    elements.forEach(el => observerRef.current?.observe(el))
+
+    return () => observerRef.current?.disconnect()
+  }, [])
 
   return (
     <main className="min-h-screen bg-white">

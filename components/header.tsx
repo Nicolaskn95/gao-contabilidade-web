@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -102,14 +102,12 @@ export function Header() {
           </nav>
 
           <div className="hidden md:block">
-            <Button
-              asChild
-              className="bg-[var(--color-gao-gold)] hover:bg-[var(--color-gao-gold)]/90 text-[var(--color-gao-green)] font-bold"
-            >
-              <Link href="/#proposta">
+            <Link href="/#proposta" className="btn-proposta">
+              <span>
                 Solicitar proposta
-              </Link>
-            </Button>
+                <ArrowRight className="icon" />
+              </span>
+            </Link>
           </div>
 
           <button 
@@ -160,14 +158,12 @@ export function Header() {
               >
                 Reforma Tributária
               </Link>
-              <Button
-                asChild
-                className="bg-[var(--color-gao-gold)] hover:bg-[var(--color-gao-gold)]/90 text-[var(--color-gao-green)] font-bold w-full mt-4"
-              >
-                <Link href="/#proposta" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link href="/#proposta" onClick={() => setIsMobileMenuOpen(false)} className="btn-proposta w-full mt-4 flex justify-center">
+                <span>
                   Solicitar proposta
-                </Link>
-              </Button>
+                  <ArrowRight className="icon" />
+                </span>
+              </Link>
             </nav>
           </div>
         )}

@@ -1,9 +1,25 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppWidget } from "@/components/whatsapp-widget"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function EquipePage() {
+  const [activeHash, setActiveHash] = useState("")
+
+  useEffect(() => {
+    // Definir hash inicial no carregamento da página
+    if (typeof window !== "undefined") {
+      setActiveHash(window.location.hash)
+      
+      // Tentar interceptar mudanças de hash futuras
+      const handleHashChange = () => setActiveHash(window.location.hash)
+      window.addEventListener('hashchange', handleHashChange)
+      return () => window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [])
   const equipe = [
     {
       name: "Gisele Alves",
@@ -72,13 +88,17 @@ export default function EquipePage() {
       <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-5xl mx-auto space-y-12">
-            {equipe.map((membro, index) => (
-              <div key={index} className="bg-white rounded-3xl p-8 md:p-10 border border-border/50 shadow-sm flex flex-col md:flex-row gap-10 items-start">
+            {equipe.map((membro, index) => {
+              const id = membro.name.toLowerCase().replace(/\s+/g, '-')
+              const isActive = activeHash === `#${id}`
+              
+              return (
+              <div key={index} id={id} className={`bg-white rounded-3xl p-8 md:p-10 border shadow-sm flex flex-col md:flex-row gap-10 items-start scroll-mt-32 transition-all duration-700 ${isActive ? 'border-[var(--color-gao-gold)] shadow-[0_8px_30px_rgba(212,175,55,0.25)] -translate-y-2' : 'border-border/50'}`}>
                 <Avatar className="w-32 h-32 border-4 border-muted shrink-0">
                   <AvatarImage src={`/equipe-${index}.jpg`} alt={membro.name} />
                   <AvatarFallback className="bg-[#024D44] text-white text-3xl font-bold">{membro.initials}</AvatarFallback>
                 </Avatar>
-                <div>
+                <div className="flex-1">
                   <h2 className="text-3xl font-bold text-foreground mb-2">{membro.name}</h2>
                   <div className="flex flex-wrap items-center gap-2 mb-4">
                     <span className="font-semibold text-[#024D44] text-lg">{membro.role}</span>
@@ -91,12 +111,21 @@ export default function EquipePage() {
                   <p className="text-muted-foreground leading-relaxed mb-6">
                     {membro.description}
                   </p>
-                  <p className="text-sm font-medium text-foreground bg-muted/50 p-4 rounded-xl">
-                    <span className="text-[#024D44] font-bold">Especialidades:</span> {membro.specialties}
-                  </p>
+                  
+                  <div>
+                    <h3 className="text-sm text-[#024D44] font-bold mb-3 uppercase tracking-wider">Especialidades</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {membro.specialties.split('·').map((spec, i) => (
+                        <span key={i} className="bg-[#024D44]/5 text-[#024D44] text-xs font-bold px-3 py-1.5 rounded-md border border-[#024D44]/20 shadow-sm">
+                          {spec.trim()}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>

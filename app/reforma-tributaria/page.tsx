@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { CheckCircle2, ArrowRight, CircleDollarSign, TrendingDown, BookOpen, Search, Monitor, RefreshCw, ShieldCheck } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 
 export default function ReformaTributariaPage() {
@@ -31,6 +31,24 @@ export default function ReformaTributariaPage() {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
+
+  const observerRef = useRef<IntersectionObserver | null>(null)
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.setAttribute('data-visible', 'true')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.2 })
+
+    const elements = document.querySelectorAll('.timeline-item')
+    elements.forEach(el => observerRef.current?.observe(el))
+
+    return () => observerRef.current?.disconnect()
+  }, [])
 
   const handleSelectChange = (name: string, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }))
@@ -154,29 +172,37 @@ Já iniciou análise?: ${formData.jaIniciou}`
       </section>
 
       {/* Linha do Tempo */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="container mx-auto px-4 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-[#024D44] mb-4">
             Linha do tempo da transição (2026–2033)
           </h2>
           <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
             Acompanhe o cronograma de implementação do novo modelo tributário.
           </p>
-          
-          <div className="space-y-8">
-            {cronograma.map((item, index) => (
-              <div key={index} className="flex flex-col md:flex-row gap-6 items-start">
-                <div className="shrink-0 md:w-32 py-2 px-4 bg-[#024D44] text-white font-bold rounded-lg text-center shadow-md">
-                  {item.ano}
+
+          <div className="relative max-w-[800px] mx-auto before:content-[''] before:absolute before:w-[3px] before:bg-gradient-to-b before:from-[var(--color-gao-gold)] before:via-[#024D44] before:to-[var(--color-gao-gold)] before:top-0 before:bottom-0 before:left-[20px] md:before:left-1/2 before:-translate-x-1/2 before:rounded-sm">
+            
+            {cronograma.map((item, index) => {
+              const isLeft = index % 2 === 0
+              return (
+                <div key={index} className={`timeline-item opacity-0 translate-y-12 data-[visible=true]:opacity-100 data-[visible=true]:translate-y-0 relative w-full md:w-1/2 py-6 pl-[3.5rem] pr-4 md:px-10 text-left group transition-all duration-700 cubic-bezier(0.34, 1.56, 0.64, 1) ${isLeft ? 'md:left-0 md:text-right' : 'md:left-1/2 md:text-left'}`}>
+                  
+                  {/* Dot */}
+                  <div className={`absolute w-[18px] h-[18px] bg-white border-[3px] border-[#024D44] rounded-full top-[2rem] z-10 transition-all duration-300 group-hover:bg-[var(--color-gao-gold)] group-hover:border-white group-hover:scale-[1.4] group-hover:shadow-[0_0_15px_rgba(212,175,55,0.6)] left-[11px] md:left-auto ${isLeft ? 'md:-right-[9px]' : 'md:-left-[9px]'}`}></div>
+                  
+                  {/* Content */}
+                  <div className="bg-white p-6 rounded-xl border border-border/50 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-[#024D44]/50 group-hover:shadow-[0_15px_30px_-5px_rgba(2,77,68,0.15)] text-left">
+                    <span className="inline-block text-[0.8rem] font-bold uppercase tracking-[0.05em] text-[var(--color-gao-gold)] mb-2">{item.ano}</span>
+                    <h3 className="text-[1.15rem] font-bold text-[#024D44] mb-2">{item.titulo}</h3>
+                    <p className="text-[0.95rem] text-muted-foreground leading-[1.5]">{item.desc}</p>
+                  </div>
                 </div>
-                <div className="flex-1 bg-muted/20 p-6 rounded-2xl border border-border/50 hover:border-[var(--color-gao-gold)] transition-colors">
-                  <h3 className="text-xl font-bold text-[#024D44] mb-2">{item.titulo}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
-          <p className="text-xs text-muted-foreground text-center mt-12 opacity-80 italic">
+          
+          <p className="text-xs text-muted-foreground text-center mt-16 opacity-80 italic max-w-2xl mx-auto">
             *Os percentuais indicados referem-se especificamente à redução gradual de ICMS e ISS entre 2029 e 2032.
           </p>
         </div>

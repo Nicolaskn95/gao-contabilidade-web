@@ -46,20 +46,29 @@ export function Services() {
           <div className="w-20 h-1 bg-[var(--color-gao-gold)] mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <Link href={`/servicos/${service.slug}`} key={index} className="block group">
-              <Card className="h-full border border-border/50 bg-muted/20 hover:border-[var(--color-gao-gold)] transition-colors shadow-none hover:shadow-md">
-                <CardContent className="p-8 flex flex-col items-center text-center">
-                  <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#024D44]/10 text-[#024D44] group-hover:bg-[#024D44] group-hover:text-white transition-colors">
+            <Link href={`/servicos/${service.slug}`} key={index} className="block group h-full">
+              <div className="relative w-full h-full bg-white rounded-lg p-8 border border-border/50 overflow-hidden z-0 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-[#024D44]">
+                
+                {/* Efeito Card1: Círculo que expande no hover */}
+                <div className="absolute z-[-1] top-[-16px] right-[-16px] bg-[#024D44] h-8 w-8 rounded-full transform scale-100 origin-center transition-transform duration-300 ease-out group-hover:scale-[40]"></div>
+                
+                {/* Go-corner (cantinho superior direito) */}
+                <div className="absolute top-0 right-0 w-8 h-8 flex items-center justify-center overflow-hidden bg-[#024D44] rounded-tr-lg rounded-bl-[32px] opacity-80 group-hover:opacity-100 transition-opacity">
+                  <span className="text-white mt-[-4px] mr-[-4px] text-lg font-mono leading-none">&rarr;</span>
+                </div>
+                
+                <div className="relative z-10 flex flex-col items-center text-center h-full">
+                  <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#024D44]/10 text-[#024D44] group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">
                     <service.icon className="h-8 w-8" />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">{service.title}</h3>
-                  <p className="text-sm text-[var(--color-gao-gold)] font-bold mt-auto opacity-0 group-hover:opacity-100 transition-opacity">
-                    Saiba mais &rarr;
+                  <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-white transition-colors duration-300">{service.title}</h3>
+                  <p className="text-sm font-bold mt-auto text-[#024D44] group-hover:text-[var(--color-gao-gold)] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center gap-2">
+                    Saiba mais <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
