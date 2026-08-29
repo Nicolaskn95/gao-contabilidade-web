@@ -104,8 +104,19 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/20 pt-8 text-center text-sm opacity-90">
+        <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm opacity-90">
           <p>&copy; {new Date().getFullYear()} GAO Contabilidade & Assessoria. Todos os direitos reservados.</p>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm">
+            <Link href="/politica-de-privacidade" className="hover:text-[var(--color-gao-gold)] transition-colors">
+              Política de Privacidade
+            </Link>
+            <Link href="/politica-de-cookies" className="hover:text-[var(--color-gao-gold)] transition-colors">
+              Política de Cookies
+            </Link>
+            <Link href="/termos-de-uso" className="hover:text-[var(--color-gao-gold)] transition-colors">
+              Termos de Uso
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

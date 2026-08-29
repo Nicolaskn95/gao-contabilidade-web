@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Geist } from "next/font/google"
+import { CookieBanner } from "@/components/cookie-banner"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
@@ -37,6 +38,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={`${geist.className} font-sans antialiased`}>
         {children}
+        <CookieBanner />
         <Analytics />
       </body>
     </html>
