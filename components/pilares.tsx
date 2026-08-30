@@ -20,7 +20,7 @@ export function Pilares() {
   ]
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="py-20 bg-[var(--color-gao-sage)]/20">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {pilares.map((pilar, index) => (

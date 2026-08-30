@@ -196,3 +196,146 @@
 .btn-proposta:active {
   transform: scale(0.95);
 }
+
+/* Custom News Card from Uiverse.io */
+.news-card {
+  width: 100%;
+  max-width: 320px;
+  height: 350px;
+  background: #e8e8e8;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  color: #212121;
+  border: 2px solid #ab4b38;
+  transition: all .5s ease;
+  margin: 0 auto;
+}
+
+.news-card .icons {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  z-index: 10;
+}
+
+.news-card .image {
+  width: 100%;
+  height: 160px;
+  background: rgb(223,235,56);
+  background: rgb(56,235,226);
+  background: linear-gradient(163deg, rgba(56,235,226,1) 0%, rgba(134,221,245,1) 50%);
+  object-fit: cover;
+  transition: filter 0.5s ease;
+}
+
+.news-card .see-more {
+  background: #ab4b38;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.news-card .see-more__icon {
+  width: 15px;
+  fill: white;
+}
+
+.news-card .card__info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  padding: 15px;
+  gap: 5px;
+  background: white;
+}
+
+.news-card .page {
+  font-size: 13px;
+  font-weight: 100;
+  color: #666;
+}
+
+.news-card .title {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  color: black;
+  transition: color 0.3s ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-card:hover {
+  box-shadow: 5px 5px 10px 0px #ab4b3866;
+}
+
+.news-card:hover .icons {
+  z-index: 10;
+  opacity: 1;
+}
+
+.news-card:hover .image {
+  filter: brightness(.8);
+}
+
+.news-card:hover .title {
+  color: #ab4b38;
+}
+
+/* From Uiverse.io by Cornerstone-04 */ 
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 10px solid var(--color-gao-sage);
+  border-top-color: var(--color-gao-green);
+  animation: spin013151 1s linear infinite;
+  border-radius: 100%;
+}
+
+@keyframes spin013151 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* From Uiverse.io by adamgiebl - Adapted for GAO Brand */ 
+.included-card {
+  width: 100%;
+  min-height: 120px;
+  border-radius: 30px;
+  background: var(--color-gao-nude);
+  box-shadow: 12px 12px 24px #c5b8aa,
+             -12px -12px 24px #ffffff;
+             
+  /* Flex to keep content aligned */
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  gap: 1rem;
+}
+
+/* Adjustments for dark mode to keep neumorphism readable */
+.dark .included-card {
+  background: var(--color-gao-green);
+  box-shadow: 10px 10px 20px rgba(0,0,0,0.3),
+             -10px -10px 20px rgba(255,255,255,0.05);
+}

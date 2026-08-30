@@ -67,7 +67,7 @@ export function Hero() {
   }, [showStaticImage])
 
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <section id="inicio" className="relative h-[100dvh] w-full flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0 z-0">
         {/* Vídeo de fundo - só mostra se não estiver na imagem estática */}
         {!showStaticImage && (
@@ -86,13 +86,14 @@ export function Hero() {
           </video>
         )}
         
-        {/* Imagem estática - mostra em caso de erro */}
+        {/* Imagem estática - mostra em caso de erro ou ao fim do vídeo */}
         {showStaticImage && (
           <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/landing-page-Br8LJbU41IBRjz1MPy1w9AFwM0pyJh.jpg"
             alt="GAO Contabilidade"
             fill
-            className="object-cover transition-opacity duration-1000"
+            sizes="100vw"
+            className="object-cover object-center transition-opacity duration-1000"
             priority
           />
         )}

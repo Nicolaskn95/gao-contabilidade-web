@@ -51,11 +51,11 @@ export default async function ServicoPage({ params }: { params: Promise<{ slug: 
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl">
             <h2 className="text-2xl font-bold text-[#024D44] mb-8">O que está incluído:</h2>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {servico.included.map((item, index) => (
-                <li key={index} className="flex items-start gap-3 p-4 rounded-xl bg-muted/20 border border-border/50">
-                  <CheckCircle2 className="w-6 h-6 text-[var(--color-gao-gold)] shrink-0 mt-0.5" />
-                  <span className="text-foreground leading-relaxed">{item}</span>
+                <li key={index} className="included-card">
+                  <CheckCircle2 className="w-6 h-6 text-[var(--color-gao-green)] dark:text-[var(--color-gao-gold)] shrink-0" />
+                  <span className="text-[var(--color-gao-green)] dark:text-[var(--color-gao-nude)] leading-relaxed font-bold">{item}</span>
                 </li>
               ))}
             </ul>

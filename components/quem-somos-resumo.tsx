@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export function QuemSomosResumo() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-[var(--color-gao-sage)]/20">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="max-w-xl text-left">
@@ -15,7 +15,7 @@ export function QuemSomosResumo() {
             </p>
           </div>
           <div>
-            <img src={"/equipe-grupo.jpg"} alt="Time GAO" className="w-full rounded-2xl shadow-sm object-cover" />
+            <img src={"/equipe-grupo.jpg"} alt="Time GAO" className="w-full rounded-2xl border-4 border-[var(--color-gao-gold)] shadow-lg object-cover" />
           </div>
         </div>
       </div>
