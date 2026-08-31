@@ -39,57 +39,65 @@ const services = [
 ]
 
 export function Services() {
-  const [isMobile, setIsMobile] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const sectionRef = useRef<HTMLElement>(null)
+  const cardRefs = useRef<(HTMLAnchorElement | null)[]>([])
 
-  // Detect mobile screen or touch device
   useEffect(() => {
-    const checkMobile = () => {
-      const isSmallScreen = window.innerWidth < 768
-      const isTouch = window.matchMedia("(pointer: coarse)").matches
-      setIsMobile(isSmallScreen || isTouch)
-    }
-
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
-
-  // Scroll effect on desktop
-  useEffect(() => {
-    if (isMobile) {
-      setActiveIndex(null)
-      return
-    }
-
     const handleScroll = () => {
       if (!sectionRef.current) return
 
-      const rect = sectionRef.current.getBoundingClientRect()
+      const sectionRect = sectionRef.current.getBoundingClientRect()
       const windowHeight = window.innerHeight
 
       // Section visible in viewport
-      if (rect.top < windowHeight * 0.85 && rect.bottom > windowHeight * 0.15) {
-        // Calculate relative scroll progress through the services section
-        const totalDistance = rect.height + windowHeight * 0.7
-        const scrolled = windowHeight * 0.85 - rect.top
-        const progress = Math.max(0, Math.min(1, scrolled / totalDistance))
+      if (sectionRect.top < windowHeight * 0.9 && sectionRect.bottom > windowHeight * 0.1) {
+        const isSmallScreen = window.innerWidth < 768
 
-        const index = Math.floor(progress * services.length)
-        const safeIndex = Math.min(services.length - 1, Math.max(0, index))
-        setActiveIndex(safeIndex)
+        if (isSmallScreen) {
+          // On mobile / small screens: highlight the card closest to viewport center as user scrolls
+          const viewportCenter = windowHeight * 0.5
+          let minDistance = Infinity
+          let closestIndex = 0
+
+          cardRefs.current.forEach((cardEl, index) => {
+            if (!cardEl) return
+            const rect = cardEl.getBoundingClientRect()
+            const cardCenter = rect.top + rect.height / 2
+            const distance = Math.abs(cardCenter - viewportCenter)
+
+            if (rect.bottom > 0 && rect.top < windowHeight && distance < minDistance) {
+              minDistance = distance
+              closestIndex = index
+            }
+          })
+
+          setActiveIndex(closestIndex)
+        } else {
+          // On desktop (grid): calculate relative scroll progress through the section
+          const totalDistance = sectionRect.height + windowHeight * 0.6
+          const scrolled = windowHeight * 0.85 - sectionRect.top
+          const progress = Math.max(0, Math.min(1, scrolled / totalDistance))
+
+          const index = Math.floor(progress * services.length)
+          const safeIndex = Math.min(services.length - 1, Math.max(0, index))
+          setActiveIndex(safeIndex)
+        }
       } else {
         setActiveIndex(null)
       }
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("resize", handleScroll, { passive: true })
     handleScroll()
 
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [isMobile])
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", handleScroll)
+    }
+  }, [])
 
   return (
     <section ref={sectionRef} id="servicos" className="py-24 bg-[var(--color-gao-sage)]/20">
@@ -103,10 +111,11 @@ export function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
-            const isCardActive = (hoveredIndex === index) || (!isMobile && activeIndex === index)
+            const isCardActive = (hoveredIndex === index) || (activeIndex === index)
 
             return (
               <Link
+                ref={(el) => { cardRefs.current[index] = el }}
                 href={`/servicos/${service.slug}`}
                 key={index}
                 className="block group h-full"
@@ -119,7 +128,7 @@ export function Services() {
                     isCardActive && "shadow-md -translate-y-1 border-[#024D44]"
                   )}
                 >
-                  {/* Efeito Card1: Círculo que expande no hover / ativado pelo scroll */}
+                  {/* Efeito Card: Círculo que expande no hover / ativado pelo scroll */}
                   <div
                     className={cn(
                       "absolute z-[-1] top-[-16px] right-[-16px] bg-[#024D44] h-8 w-8 rounded-full transform scale-100 origin-center transition-transform duration-500 ease-out group-hover:scale-[40]",
@@ -180,4 +189,5 @@ export function Services() {
     </section>
   )
 }
+
 
