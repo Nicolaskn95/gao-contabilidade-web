@@ -339,3 +339,70 @@
   box-shadow: 10px 10px 20px rgba(0,0,0,0.3),
              -10px -10px 20px rgba(255,255,255,0.05);
 }
+
+/* Botão Hambúrguer */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .hamburger,
+  .nav-menu {
+    display: none !important;
+  }
+}
+
+.hamburger .bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: currentColor;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animação do X */
+.hamburger.active .bar:nth-child(1) {
+  transform: translateY(8.5px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* Menu Mobile */
+.nav-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  
+  /* Transição e estado inicial escondido */
+  transform: translateY(-150%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0.35s ease;
+}
+
+/* Estado Aberto */
+.nav-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}

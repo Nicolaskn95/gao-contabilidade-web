@@ -5,10 +5,17 @@ import { Button } from "@/components/ui/button"
 import { Menu, X, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+
+  const isReformaPage = pathname === "/reforma-tributaria"
+  const hoverClass = (isReformaPage && !isScrolled)
+    ? "hover:text-[var(--color-gao-green)]" 
+    : "hover:text-[var(--color-gao-gold)]"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,7 +58,7 @@ export function Header() {
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/"
-              className={`text-sm font-medium transition-all duration-300 hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md ${
+              className={`text-sm font-medium transition-all duration-300 ${hoverClass} px-3 py-2 rounded-md ${
                 isScrolled 
                   ? "text-foreground" 
                   : "text-white drop-shadow-md"
@@ -61,7 +68,7 @@ export function Header() {
             </Link>
             <Link
               href="/#servicos"
-              className={`text-sm font-medium transition-all duration-300 hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md ${
+              className={`text-sm font-medium transition-all duration-300 ${hoverClass} px-3 py-2 rounded-md ${
                 isScrolled 
                   ? "text-foreground" 
                   : "text-white drop-shadow-md"
@@ -71,7 +78,7 @@ export function Header() {
             </Link>
             <Link
               href="/quem-somos"
-              className={`text-sm font-medium transition-all duration-300 hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md ${
+              className={`text-sm font-medium transition-all duration-300 ${hoverClass} px-3 py-2 rounded-md ${
                 isScrolled 
                   ? "text-foreground" 
                   : "text-white drop-shadow-md"
@@ -81,7 +88,7 @@ export function Header() {
             </Link>
             <Link
               href="/equipe"
-              className={`text-sm font-medium transition-all duration-300 hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md ${
+              className={`text-sm font-medium transition-all duration-300 ${hoverClass} px-3 py-2 rounded-md ${
                 isScrolled 
                   ? "text-foreground" 
                   : "text-white drop-shadow-md"
@@ -91,9 +98,11 @@ export function Header() {
             </Link>
             <Link
               href="/reforma-tributaria"
-              className={`text-sm font-medium transition-all duration-300 hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md ${
+              className={`text-sm font-medium transition-all duration-300 ${hoverClass} px-3 py-2 rounded-md ${
                 isScrolled 
                   ? "text-[var(--color-gao-green)] font-bold" 
+                  : isReformaPage
+                  ? "text-white font-bold drop-shadow-md"
                   : "text-[var(--color-gao-gold)] font-bold drop-shadow-md"
               }`}
             >
@@ -111,62 +120,65 @@ export function Header() {
           </div>
 
           <button 
-            className={`md:hidden transition-colors duration-300 ${
+            className={`hamburger md:hidden transition-colors duration-300 ${
               isScrolled ? "text-foreground" : "text-white drop-shadow-md"
-            }`} 
+            } ${isMobileMenuOpen ? "active" : ""}`} 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
           </button>
         </div>
 
-        {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border bg-background/95 backdrop-blur-md absolute left-0 right-0 top-20 shadow-md">
-            <nav className="flex flex-col gap-4 px-4">
-              <Link
-                href="/"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-left text-sm font-medium text-foreground hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md transition-all"
-              >
-                Home
-              </Link>
-              <Link
-                href="/#servicos"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-left text-sm font-medium text-foreground hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md transition-all"
-              >
-                Serviços
-              </Link>
-              <Link
-                href="/quem-somos"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-left text-sm font-medium text-foreground hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md transition-all"
-              >
-                Quem Somos
-              </Link>
-              <Link
-                href="/equipe"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-left text-sm font-medium text-foreground hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md transition-all"
-              >
-                Equipe
-              </Link>
-              <Link
-                href="/reforma-tributaria"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-left text-sm font-bold text-[var(--color-gao-green)] hover:text-[var(--color-gao-gold)] px-3 py-2 rounded-md transition-all"
-              >
-                Reforma Tributária
-              </Link>
-              <Link href="/#proposta" onClick={() => setIsMobileMenuOpen(false)} className="btn-proposta w-full mt-4 flex justify-center">
-                <span>
-                  Solicitar proposta
-                  <ArrowRight className="icon" />
-                </span>
-              </Link>
-            </nav>
-          </div>
-        )}
+        <div className={`nav-menu md:hidden py-4 border-t border-border bg-background/95 backdrop-blur-md left-0 right-0 top-20 shadow-md ${
+          isMobileMenuOpen ? "open" : ""
+        }`}>
+          <nav className="flex flex-col gap-4 px-4 w-full">
+            <Link
+              href="/"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`text-left text-sm font-medium text-foreground ${hoverClass} px-3 py-2 rounded-md transition-all`}
+            >
+              Home
+            </Link>
+            <Link
+              href="/#servicos"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`text-left text-sm font-medium text-foreground ${hoverClass} px-3 py-2 rounded-md transition-all`}
+            >
+              Serviços
+            </Link>
+            <Link
+              href="/quem-somos"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`text-left text-sm font-medium text-foreground ${hoverClass} px-3 py-2 rounded-md transition-all`}
+            >
+              Quem Somos
+            </Link>
+            <Link
+              href="/equipe"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`text-left text-sm font-medium text-foreground ${hoverClass} px-3 py-2 rounded-md transition-all`}
+            >
+              Equipe
+            </Link>
+            <Link
+              href="/reforma-tributaria"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`text-left text-sm font-bold text-[var(--color-gao-green)] ${hoverClass} px-3 py-2 rounded-md transition-all`}
+            >
+              Reforma Tributária
+            </Link>
+            <Link href="/#proposta" onClick={() => setIsMobileMenuOpen(false)} className="btn-proposta w-full mt-4 flex justify-center">
+              <span>
+                Solicitar proposta
+                <ArrowRight className="icon" />
+              </span>
+            </Link>
+          </nav>
+        </div>
       </div>
     </header>
   )
