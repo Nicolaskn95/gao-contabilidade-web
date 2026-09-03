@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react"
 import { Calculator, Receipt, Users, Briefcase, TrendingUp, User } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 const services = [
   {
@@ -39,12 +40,18 @@ const services = [
 ]
 
 export function Services() {
+  const isMobile = useIsMobile()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const cardRefs = useRef<(HTMLAnchorElement | null)[]>([])
 
   useEffect(() => {
+    // On desktop, scroll selection is completely disabled
+    if (!isMobile) {
+      setActiveIndex(null)
+      return
+    }
+
     const handleScroll = () => {
       if (!sectionRef.current) return
 
@@ -53,37 +60,24 @@ export function Services() {
 
       // Section visible in viewport
       if (sectionRect.top < windowHeight * 0.9 && sectionRect.bottom > windowHeight * 0.1) {
-        const isSmallScreen = window.innerWidth < 768
+        // On mobile: highlight the card closest to viewport center as user scrolls
+        const viewportCenter = windowHeight * 0.5
+        let minDistance = Infinity
+        let closestIndex = 0
 
-        if (isSmallScreen) {
-          // On mobile / small screens: highlight the card closest to viewport center as user scrolls
-          const viewportCenter = windowHeight * 0.5
-          let minDistance = Infinity
-          let closestIndex = 0
+        cardRefs.current.forEach((cardEl, index) => {
+          if (!cardEl) return
+          const rect = cardEl.getBoundingClientRect()
+          const cardCenter = rect.top + rect.height / 2
+          const distance = Math.abs(cardCenter - viewportCenter)
 
-          cardRefs.current.forEach((cardEl, index) => {
-            if (!cardEl) return
-            const rect = cardEl.getBoundingClientRect()
-            const cardCenter = rect.top + rect.height / 2
-            const distance = Math.abs(cardCenter - viewportCenter)
+          if (rect.bottom > 0 && rect.top < windowHeight && distance < minDistance) {
+            minDistance = distance
+            closestIndex = index
+          }
+        })
 
-            if (rect.bottom > 0 && rect.top < windowHeight && distance < minDistance) {
-              minDistance = distance
-              closestIndex = index
-            }
-          })
-
-          setActiveIndex(closestIndex)
-        } else {
-          // On desktop (grid): calculate relative scroll progress through the section
-          const totalDistance = sectionRect.height + windowHeight * 0.6
-          const scrolled = windowHeight * 0.85 - sectionRect.top
-          const progress = Math.max(0, Math.min(1, scrolled / totalDistance))
-
-          const index = Math.floor(progress * services.length)
-          const safeIndex = Math.min(services.length - 1, Math.max(0, index))
-          setActiveIndex(safeIndex)
-        }
+        setActiveIndex(closestIndex)
       } else {
         setActiveIndex(null)
       }
@@ -97,7 +91,7 @@ export function Services() {
       window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("resize", handleScroll)
     }
-  }, [])
+  }, [isMobile])
 
   return (
     <section ref={sectionRef} id="servicos" className="py-24 bg-[var(--color-gao-sage)]/20">
@@ -111,16 +105,15 @@ export function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
-            const isCardActive = (hoveredIndex === index) || (activeIndex === index)
+            // Scroll activation ONLY applies on mobile screen
+            const isCardActive = isMobile && activeIndex === index
 
             return (
               <Link
                 ref={(el) => { cardRefs.current[index] = el }}
                 href={`/servicos/${service.slug}`}
                 key={index}
-                className="block group h-full"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
+                className="block group h-full select-none"
               >
                 <div
                   className={cn(
@@ -128,7 +121,7 @@ export function Services() {
                     isCardActive && "shadow-md -translate-y-1 border-[#024D44]"
                   )}
                 >
-                  {/* Efeito Card: Círculo que expande no hover / ativado pelo scroll */}
+                  {/* Efeito Card: Círculo que expande no hover / ativado pelo scroll no mobile */}
                   <div
                     className={cn(
                       "absolute z-[-1] top-[-16px] right-[-16px] bg-[#024D44] h-8 w-8 rounded-full transform scale-100 origin-center transition-transform duration-500 ease-out group-hover:scale-[40]",
