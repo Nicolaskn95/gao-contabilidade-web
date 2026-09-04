@@ -35,7 +35,7 @@ export default function EquipePage() {
       role: "Especialista Fiscal e Consultora Tributária",
       experience: "+ de 11 anos de experiência",
       formation: "Ciências Contábeis · duas pós-graduações em Direito Tributário · pós-graduação em Reforma Tributária (em andamento)",
-      description: "Profissional com mais de 11 anos de experiência nas áreas fiscal e tributária, com formação em Ciências Contábeis e duas pós-graduações em Direito Tributário. Atua em consultoria e planejamento tributário, compliance, regularização fiscal e análise estratégica das operações, com especialização voltada aos impactos e à implementação da Reforma Tributária.",
+      description: "Profissional com mais de 11 anos de experiência nas áreas fiscal e tributária. Atua em consultoria e planejamento tributário, compliance, regularização fiscal e análise estratégica das operações, com especialização voltada aos impactos e à implementação da Reforma Tributária.",
       specialties: "Consultoria e planejamento tributário · Reforma Tributária · Compliance e revisão tributária · Regularização fiscal e transação tributária · Tributação de operações · Planejamento e reorganização societária com foco tributário",
       initials: "IG"
     },
@@ -43,7 +43,7 @@ export default function EquipePage() {
       name: "Amanda Carolini",
       role: "Responsável por Legalização Societária",
       experience: "+ de 8 anos de experiência",
-      formation: "A confirmar",
+      formation: "Gestão Financeira, com cursos de aperfeiçoamento na área societária.",
       description: "Profissional com mais de 8 anos de experiência em legalização societária, atuando em processos de constituição, alteração, regularização e encerramento de empresas, além do acompanhamento de registros, inscrições e procedimentos perante os órgãos competentes.",
       specialties: "Constituição e abertura de empresas · Alterações contratuais e societárias · Regularização cadastral · Inscrições e licenças · Baixa e encerramento de empresas · Processos perante órgãos de registro e fiscalização",
       initials: "AC"
@@ -52,7 +52,7 @@ export default function EquipePage() {
       name: "Fernanda Massone",
       role: "Responsável pelo Departamento Pessoal",
       experience: "+ de 10 anos de experiência",
-      formation: "A confirmar",
+      formation: "Graduação em Ciências Contábeis, com cursos de aperfeiçoamento nas áreas trabalhista e previdenciária.",
       description: "Profissional com mais de 10 anos de experiência em Departamento Pessoal, com atuação em folha de pagamento, cálculos e obrigações trabalhistas, eSocial, regularização de vínculos e atendimento a fiscalizações. Possui também experiência no tratamento de rotinas decorrentes de reclamatórias trabalhistas.",
       specialties: "Folha de pagamento e encargos · Admissões, férias e rescisões · eSocial e obrigações trabalhistas · Cálculos trabalhistas · Regularização de vínculos · Reclamatórias trabalhistas e seus reflexos em folha · Atendimento a fiscalizações",
       initials: "FM"
@@ -94,8 +94,8 @@ export default function EquipePage() {
               
               return (
               <div key={index} id={id} className={`bg-white rounded-3xl p-8 md:p-10 border shadow-sm flex flex-col md:flex-row gap-10 items-start scroll-mt-32 transition-all duration-700 ${isActive ? 'border-[var(--color-gao-gold)] shadow-[0_8px_30px_rgba(212,175,55,0.25)] -translate-y-2' : 'border-border/50'}`}>
-                <Avatar className="w-32 h-32 border-4 border-muted shrink-0">
-                  <AvatarImage src={`/equipe-${index}.jpg`} alt={membro.name} />
+                <Avatar className="w-56 h-56 border-4 border-muted shrink-0">
+                  <AvatarImage src={`/equipe-${index}.jpg`} alt={membro.name} className={`object-cover ${index === 1 ? 'object-top' : ''}`} />
                   <AvatarFallback className="bg-[#024D44] text-white text-3xl font-bold">{membro.initials}</AvatarFallback>
                 </Avatar>
                 <div className="flex-1">

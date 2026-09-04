@@ -105,10 +105,15 @@ export function Contact() {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                    Enviar via WhatsApp
-                    <Send className="ml-2 h-4 w-4" />
-                  </Button>
+                  <button
+                    type="submit"
+                    className="btn-proposta w-full mt-4"
+                  >
+                    <span className="w-full justify-center">
+                      Enviar via WhatsApp
+                      <Send className="icon ml-2 h-4 w-4" />
+                    </span>
+                  </button>
                 </form>
               </CardContent>
             </Card>

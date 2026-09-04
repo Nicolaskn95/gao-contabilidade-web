@@ -22,7 +22,7 @@ export const servicos = [
       "Apuração de tributos federais, estaduais e municipais",
       "Elaboração e validação das obrigações acessórias federais, estaduais e municipais",
       "Acompanhamento de mudanças na legislação fiscal",
-      "Emissão e conferência de guias de recolhimento",
+      "Escrituração fiscal e obrigações acessórias",
       "Análise da tributação das operações",
       "Orientação sobre emissão e escrituração de documentos fiscais",
       "Monitoramento da regularidade fiscal",

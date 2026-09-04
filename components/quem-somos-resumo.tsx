@@ -14,8 +14,17 @@ export function QuemSomosResumo() {
               Contabilidade próxima, estratégica e conectada ao seu negócio. Unimos conhecimento técnico, tecnologia e atuação consultiva nas áreas contábil, fiscal, trabalhista, societária e tributária.
             </p>
           </div>
-          <div>
-            <img src={"/equipe-grupo.jpg"} alt="Time GAO" className="w-full rounded-2xl border-4 border-[var(--color-gao-gold)] shadow-lg object-cover" />
+          <div className="relative w-full">
+            <div 
+              className="w-full p-[3px] rounded-[20px] shadow-lg transition-all duration-300 hover:shadow-[0_0_30px_1px_rgba(2,77,68,0.35)] group"
+              style={{ backgroundImage: 'linear-gradient(163deg, var(--color-gao-gold) 0%, var(--color-gao-green) 100%)' }}
+            >
+              <img 
+                src={"/equipe-grupo.jpg"} 
+                alt="Time GAO" 
+                className="w-full h-auto rounded-[17px] object-cover transition-all duration-200 group-hover:scale-[0.98] group-hover:rounded-[18px]" 
+              />
+            </div>
           </div>
         </div>
       </div>
