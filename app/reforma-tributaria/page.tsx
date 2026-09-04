@@ -107,7 +107,7 @@ Já iniciou análise?: ${formData.jaIniciou}`
   const faqs = [
     {
       q: "O que muda com a Reforma Tributária?",
-      a: "O atual sistema de tributação sobre o consumo será substituído gradualmente por um novo modelo baseado principalmente na CBS, de competência federal, e no IBS, de competência compartilhada entre Estados, Distrito Federal e Municípios, além do Imposto Seletivo nas hipóteses previstas em lei. A transição afeta tributação, créditos, documentos fiscais, sistemas, contratos, formação de preços, margens e fluxo de caixa das empresas."
+      a: "O atual sistema de tributação sobre o consumo será substituído gradualmente por um novo modelo baseado principalmente na CBS e no IBS, além da criação do Imposto Seletivo. A Reforma também prevê mudanças no IPI, cujas alíquotas serão reduzidas a zero a partir de 2027, ressalvadas as hipóteses previstas na legislação. A transição também trará impactos sobre créditos tributários, documentos fiscais, sistemas, contratos, formação de preços, margens e fluxo de caixa das empresas."
     },
     {
       q: "Minha empresa precisa agir agora, mesmo com a transição terminando em 2033?",
@@ -123,7 +123,7 @@ Já iniciou análise?: ${formData.jaIniciou}`
     },
     {
       q: "A Reforma Tributária afeta empresas do Simples Nacional?",
-      a: "Sim. O Simples Nacional foi mantido, mas as empresas optantes também serão impactadas pelo novo sistema. A legislação prevê tratamento específico para IBS e CBS, inclusive com reflexos na geração e no aproveitamento de créditos ao longo da cadeia. A melhor estratégia dependerá das características da empresa, de seus clientes, fornecedores e operações."
+      a: "Sim. O Simples Nacional foi mantido, mas as empresas optantes também serão impactadas pela Reforma Tributária. A partir de 2027, será possível permanecer no Simples Nacional tradicional (ou “puro”), com IBS e CBS recolhidos dentro do DAS, ou optar pelo chamado Simples Nacional híbrido, mantendo os demais tributos no Simples e recolhendo IBS e CBS pelo regime regular, fora do DAS.\n\nA escolha pode afetar a apropriação e a transferência de créditos de IBS e CBS, além da carga tributária e da competitividade da empresa ao longo da cadeia. Por isso, a melhor alternativa deverá ser analisada conforme o perfil da empresa, seus clientes, fornecedores e operações."
     },
     {
       q: "Como a GAO pode ajudar minha empresa nesse processo?",
@@ -248,7 +248,7 @@ Já iniciou análise?: ${formData.jaIniciou}`
                 <AccordionTrigger className="text-left text-lg font-bold text-foreground hover:text-[var(--color-gao-gold)] hover:no-underline py-6">
                   {faq.q}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed text-base pb-6">
+                <AccordionContent className="text-muted-foreground leading-relaxed text-base pb-6 whitespace-pre-line">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>
@@ -347,6 +347,7 @@ Já iniciou análise?: ${formData.jaIniciou}`
                           <SelectValue placeholder="Selecione" />
                         </SelectTrigger>
                         <SelectContent>
+                          <SelectItem value="Sem funcionários">Sem funcionários</SelectItem>
                           <SelectItem value="1 a 5">1 a 5</SelectItem>
                           <SelectItem value="6 a 20">6 a 20</SelectItem>
                           <SelectItem value="21 a 50">21 a 50</SelectItem>
@@ -374,14 +375,15 @@ Já iniciou análise?: ${formData.jaIniciou}`
                     </div>
                   </div>
 
-                  <Button
+                  <button
                     type="submit"
-                    size="lg"
-                    className="w-full bg-[#024D44] hover:bg-[#024D44]/90 text-[var(--color-gao-gold)] font-bold text-lg py-6 mt-6"
+                    className="btn-proposta w-full mt-6"
                   >
-                    Enviar via WhatsApp
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
+                    <span className="w-full justify-center">
+                      Enviar via WhatsApp
+                      <ArrowRight className="icon ml-2 h-5 w-5" />
+                    </span>
+                  </button>
                 </form>
               </CardContent>
             </Card>

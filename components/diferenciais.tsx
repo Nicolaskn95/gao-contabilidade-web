@@ -21,6 +21,10 @@ export function Diferenciais() {
     {
       title: "Visão integrada do negócio",
       description: "Contábil, fiscal, tributário, societário e trabalhista analisados de forma conectada."
+    },
+    {
+      title: "Relações de confiança e longo prazo",
+      description: "Construímos parcerias baseadas em confiança, proximidade e continuidade."
     }
   ]
 
@@ -36,11 +40,13 @@ export function Diferenciais() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {diferenciais.map((item, index) => (
-            <div key={index} className="flex gap-4 items-start p-6 rounded-2xl bg-muted/20 border border-border/50 hover:border-[var(--color-gao-gold)]/50 transition-colors">
-              <CheckCircle2 className="w-8 h-8 text-[var(--color-gao-gold)] shrink-0 mt-1" />
-              <div>
-                <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+            <div key={index} className="pilar-card">
+              <div className="pilar-card-inner flex gap-4 items-start p-6 text-left h-full">
+                <CheckCircle2 className="w-8 h-8 text-[var(--color-gao-gold)] shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-lg font-bold text-[#024D44] mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                </div>
               </div>
             </div>
           ))}

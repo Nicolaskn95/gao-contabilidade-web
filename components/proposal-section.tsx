@@ -149,6 +149,7 @@ Aguardo retorno. Obrigado!`
                           <SelectValue placeholder="Selecione o número de funcionários" />
                         </SelectTrigger>
                         <SelectContent>
+                          <SelectItem value="Sem funcionários">Sem funcionários</SelectItem>
                           <SelectItem value="1 a 5">1 a 5 funcionários</SelectItem>
                           <SelectItem value="6 a 10">6 a 10 funcionários</SelectItem>
                           <SelectItem value="11 a 20">11 a 20 funcionários</SelectItem>
@@ -159,14 +160,15 @@ Aguardo retorno. Obrigado!`
                       </Select>
                     </div>
 
-                    <Button
+                    <button
                       type="submit"
-                      size="lg"
-                      className="w-full bg-[var(--color-gao-gold)] hover:bg-[var(--color-gao-gold)]/90 text-[#024D44] font-bold text-lg py-6 mt-4"
+                      className="btn-proposta w-full mt-4"
                     >
-                      Enviar proposta via WhatsApp
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
+                      <span className="w-full justify-center">
+                        Enviar proposta via WhatsApp
+                        <ArrowRight className="icon ml-2 h-5 w-5" />
+                      </span>
+                    </button>
 
                     <p className="text-xs text-muted-foreground text-center">
                       Ao enviar, você será direcionado para nosso WhatsApp

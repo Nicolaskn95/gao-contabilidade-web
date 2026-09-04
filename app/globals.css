@@ -406,3 +406,36 @@
   visibility: visible;
   pointer-events: auto;
 }
+
+/* Cards Efeito Pilares (Agilidade, Clareza, Estratégia) */
+.pilar-card {
+  width: 100%;
+  max-width: 360px;
+  background-image: linear-gradient(163deg, var(--color-gao-gold) 0%, var(--color-gao-green) 100%);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  padding: 3px;
+  margin: 0 auto;
+}
+
+.pilar-card-inner {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 17px;
+  transition: all 0.2s ease;
+}
+
+.dark .pilar-card-inner {
+  background-color: #1a1a1a;
+}
+
+.pilar-card:hover {
+  box-shadow: 0px 0px 30px 1px rgba(2, 77, 68, 0.35);
+  /* padding: .5px; */
+}
+
+.pilar-card:hover .pilar-card-inner {
+  transform: scale(0.99);
+  border-radius: 17px;
+}

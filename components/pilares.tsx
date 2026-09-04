@@ -1,19 +1,22 @@
-import { Zap, Eye, Target } from "lucide-react"
+import { LighthouseIcon } from "./icons/lighthouse-icon"
+import { StopwatchIcon } from "./icons/stopwatch-icon"
+import { StrategyIcon } from "./icons/strategy-icon"
+
 
 export function Pilares() {
   const pilares = [
     {
-      icon: <Zap className="w-12 h-12 text-[var(--color-gao-gold)] mb-4" />,
+      icon: <StopwatchIcon className="w-24 h-24 text-[var(--color-gao-gold)] mb-4" />,
       title: "Agilidade",
       description: "Prazos e obrigações sempre em dia"
     },
     {
-      icon: <Eye className="w-12 h-12 text-[var(--color-gao-gold)] mb-4" />,
+      icon: <LighthouseIcon className="w-24 h-24 text-[var(--color-gao-gold)] mb-4" />,
       title: "Clareza",
       description: "Informação que você entende, sem jargão"
     },
     {
-      icon: <Target className="w-12 h-12 text-[var(--color-gao-gold)] mb-4" />,
+      icon: <StrategyIcon className="w-24 h-24 text-[var(--color-gao-gold)] mb-4" />,
       title: "Estratégia",
       description: "Decisões baseadas em dados, não achismo"
     }
@@ -24,10 +27,12 @@ export function Pilares() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {pilares.map((pilar, index) => (
-            <div key={index} className="flex flex-col items-center text-center p-8 bg-card rounded-2xl shadow-sm border border-border/50 hover:shadow-md transition-shadow">
-              {pilar.icon}
-              <h3 className="text-2xl font-bold text-[#024D44] mb-3">{pilar.title}</h3>
-              <p className="text-muted-foreground">{pilar.description}</p>
+            <div key={index} className="pilar-card">
+              <div className="pilar-card-inner flex flex-col items-center text-center p-8 min-h-[240px] justify-center">
+                {pilar.icon}
+                <h3 className="text-2xl font-bold text-[#024D44] mb-3">{pilar.title}</h3>
+                <p className="text-muted-foreground">{pilar.description}</p>
+              </div>
             </div>
           ))}
         </div>
