@@ -28,7 +28,7 @@ export function ReformaTributariaDestaque() {
             <Button
               asChild
               size="lg"
-              className="bg-[#024D44] hover:bg-[#024D44]/90 text-white border-none text-base px-8 py-6 font-bold shadow-lg hover:shadow-xl transition-all"
+              className="w-full sm:w-auto h-auto whitespace-normal text-center bg-[#024D44] hover:bg-[#024D44]/90 text-white border-none text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 font-bold shadow-lg hover:shadow-xl transition-all leading-snug break-words"
             >
               <Link href="/reforma-tributaria">
                 Prepare sua empresa para a Reforma Tributária

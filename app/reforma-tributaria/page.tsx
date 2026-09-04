@@ -147,7 +147,7 @@ Já iniciou análise?: ${formData.jaIniciou}`
           <Button
             asChild
             size="lg"
-            className="bg-[#024D44] hover:bg-[#024D44]/90 text-white text-base px-8 py-6 font-bold shadow-lg transition-all"
+            className="w-full sm:w-auto h-auto whitespace-normal text-center bg-[#024D44] hover:bg-[#024D44]/90 text-white text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 font-bold shadow-lg transition-all leading-snug break-words"
           >
             <a href="#avaliacao">
               Avaliar os impactos na minha empresa

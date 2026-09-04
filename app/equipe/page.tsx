@@ -20,6 +20,7 @@ export default function EquipePage() {
       return () => window.removeEventListener('hashchange', handleHashChange)
     }
   }, [])
+
   const equipe = [
     {
       name: "Gisele Alves",
@@ -93,30 +94,34 @@ export default function EquipePage() {
               const isActive = activeHash === `#${id}`
               
               return (
-              <div key={index} id={id} className={`bg-white rounded-3xl p-8 md:p-10 border shadow-sm flex flex-col md:flex-row gap-10 items-start scroll-mt-32 transition-all duration-700 ${isActive ? 'border-[var(--color-gao-gold)] shadow-[0_8px_30px_rgba(212,175,55,0.25)] -translate-y-2' : 'border-border/50'}`}>
-                <Avatar className="w-56 h-56 border-4 border-muted shrink-0">
+              <div key={index} id={id} className={`bg-white rounded-3xl p-6 sm:p-8 md:p-10 border shadow-sm flex flex-col md:flex-row gap-6 md:gap-10 items-center md:items-start scroll-mt-32 transition-all duration-700 ${isActive ? 'border-[var(--color-gao-gold)] shadow-[0_8px_30px_rgba(212,175,55,0.25)] -translate-y-2' : 'border-border/50'}`}>
+                <Avatar className="w-44 h-44 sm:w-48 sm:h-48 md:w-56 md:h-56 border-4 border-muted shrink-0 shadow-sm">
                   <AvatarImage src={`/equipe-${index}.jpg`} alt={membro.name} className={`object-cover ${index === 1 ? 'object-top' : ''}`} />
-                  <AvatarFallback className="bg-[#024D44] text-white text-3xl font-bold">{membro.initials}</AvatarFallback>
+                  <AvatarFallback className="bg-[#024D44] text-white text-2xl sm:text-3xl font-bold">{membro.initials}</AvatarFallback>
                 </Avatar>
-                <div className="flex-1">
-                  <h2 className="text-3xl font-bold text-foreground mb-2">{membro.name}</h2>
-                  <div className="flex flex-wrap items-center gap-2 mb-4">
-                    <span className="font-semibold text-[#024D44] text-lg">{membro.role}</span>
-                    <span className="text-muted-foreground hidden md:inline">•</span>
-                    <span className="text-sm font-bold text-[var(--color-gao-gold)]">{membro.experience}</span>
+                <div className="flex-1 text-left w-full">
+                  <div className="text-center md:text-left mb-4">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-1 sm:mb-2">{membro.name}</h2>
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-center md:justify-start gap-1 sm:gap-2">
+                      <span className="font-semibold text-[#024D44] text-base sm:text-lg">{membro.role}</span>
+                      <span className="text-muted-foreground hidden sm:inline">•</span>
+                      <span className="text-xs sm:text-sm font-bold text-[var(--color-gao-gold)]">{membro.experience}</span>
+                    </div>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-6 font-medium">
-                    <span className="text-foreground">Formação:</span> {membro.formation}
+
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-4 font-medium leading-relaxed bg-muted/20 p-3 rounded-xl border border-border/40">
+                    <span className="text-foreground font-semibold">Formação:</span> {membro.formation}
                   </p>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
+                  
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
                     {membro.description}
                   </p>
                   
                   <div>
-                    <h3 className="text-sm text-[#024D44] font-bold mb-3 uppercase tracking-wider">Especialidades</h3>
-                    <div className="flex flex-wrap gap-2">
+                    <h3 className="text-xs sm:text-sm text-[#024D44] font-bold mb-3 uppercase tracking-wider text-center md:text-left">Especialidades</h3>
+                    <div className="flex flex-wrap justify-center md:justify-start gap-1.5 sm:gap-2">
                       {membro.specialties.split('·').map((spec, i) => (
-                        <span key={i} className="bg-[#024D44]/5 text-[#024D44] text-xs font-bold px-3 py-1.5 rounded-md border border-[#024D44]/20 shadow-sm">
+                        <span key={i} className="bg-[#024D44]/5 text-[#024D44] text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-[#024D44]/20 shadow-xs">
                           {spec.trim()}
                         </span>
                       ))}

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, MouseEvent, useEffect } from "react"
-import { Newspaper, ExternalLink, ChevronLeft, ChevronRight, Calendar, X } from "lucide-react"
+import { Newspaper, ExternalLink, ChevronLeft, ChevronRight, Calendar, X, ZoomIn } from "lucide-react"
 
 export interface NewsItem {
   title: string
@@ -98,6 +98,7 @@ export function NewsSlider({ news }: { news: NewsItem[] }) {
                   <div 
                     className="relative h-44 w-full overflow-hidden bg-muted cursor-pointer group/image"
                     onClick={() => !isDragging && setPreviewItem(item)}
+                    title="Toque/Clique para ampliar a imagem"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -105,10 +106,18 @@ export function NewsSlider({ news }: { news: NewsItem[] }) {
                       alt={item.title}
                       className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500 pointer-events-none"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/30 transition-colors flex items-center justify-center opacity-0 group-hover/image:opacity-100 pointer-events-none">
-                      <span className="bg-white/95 text-[#024D44] text-xs font-bold px-4 py-2 rounded-full shadow-lg backdrop-blur-sm">
-                        Clique para ampliar
+                    
+                    {/* Hover Overlay Desktop */}
+                    <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/30 transition-colors hidden sm:flex items-center justify-center opacity-0 group-hover/image:opacity-100 pointer-events-none">
+                      <span className="bg-white/95 text-[#024D44] text-xs font-bold px-4 py-2 rounded-full shadow-lg backdrop-blur-sm flex items-center gap-1.5">
+                        <ZoomIn className="w-3.5 h-3.5 text-[var(--color-gao-gold)]" /> Clique para ampliar
                       </span>
+                    </div>
+
+                    {/* Badge Permanente no Mobile */}
+                    <div className="absolute bottom-2.5 right-2.5 bg-[#024D44]/90 text-white px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center gap-1 shadow-md border border-[var(--color-gao-gold)]/60 backdrop-blur-xs z-10 pointer-events-none sm:hidden">
+                      <ZoomIn className="w-3.5 h-3.5 text-[var(--color-gao-gold)]" />
+                      <span>Toque para ampliar</span>
                     </div>
                   </div>
                 ) : (
