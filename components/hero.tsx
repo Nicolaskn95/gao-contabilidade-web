@@ -101,6 +101,9 @@ export function Hero() {
         {/* Overlay com gradiente */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-secondary/90" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+
+        {/* Pattern de Pontos (Dotted Matrix) */}
+        <div className="absolute inset-0 hero-pattern-dots pointer-events-none" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
