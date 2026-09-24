@@ -119,7 +119,7 @@ export function Footer() {
           <div className="text-center md:text-left">
             <p>&copy; {new Date().getFullYear()} GAO Contabilidade & Assessoria. Todos os direitos reservados.</p>
             <p className="mt-1 text-xs text-white/70">
-              Desenvolvido com ❤️ por Nicolas Nagano
+              Desenvolvido por Nicolas Nagano
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm">

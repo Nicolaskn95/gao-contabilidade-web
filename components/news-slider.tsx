@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, MouseEvent, useEffect } from "react"
-import { Newspaper, ExternalLink, ChevronLeft, ChevronRight, Calendar, X, ZoomIn } from "lucide-react"
+import { Newspaper, ExternalLink, ChevronLeft, ChevronRight, Calendar, X, ZoomIn, Landmark } from "lucide-react"
 
 export interface NewsItem {
   title: string
@@ -9,6 +9,7 @@ export interface NewsItem {
   pubDate: string
   imageUrl?: string
   excerpt?: string
+  source?: "contabeis" | "receita" | string
 }
 
 export function NewsSlider({ news }: { news: NewsItem[] }) {
@@ -121,8 +122,27 @@ export function NewsSlider({ news }: { news: NewsItem[] }) {
                     </div>
                   </div>
                 ) : (
-                  <div className="h-28 w-full bg-gradient-to-br from-[#024D44] to-[var(--color-gao-gold)] opacity-90 flex items-center justify-center p-4">
-                    <Newspaper className="w-10 h-10 text-white/40" />
+                  <div className="h-32 w-full bg-gradient-to-br from-[#024D44] via-[#03594f] to-[#01352f] flex flex-col items-center justify-center p-4 relative overflow-hidden">
+                    <div className="absolute -right-4 -bottom-4 w-20 h-20 bg-white/5 rounded-full pointer-events-none" />
+                    {item.source === "receita" ? (
+                      <>
+                        <div className="mb-2 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-[var(--color-gao-gold)]/40 shadow-inner">
+                          <Landmark className="w-5 h-5 text-[var(--color-gao-gold)]" />
+                        </div>
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--color-gao-gold)]">
+                          Receita Federal
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <div className="mb-2 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
+                          <Newspaper className="w-5 h-5 text-white/80" />
+                        </div>
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-white/80">
+                          Portal Contábeis
+                        </span>
+                      </>
+                    )}
                   </div>
                 )}
 
