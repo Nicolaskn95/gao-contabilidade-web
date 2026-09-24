@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Geist } from "next/font/google"
+import Script from "next/script"
 import { CookieBanner } from "@/components/cookie-banner"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
@@ -40,7 +41,21 @@ export default function RootLayout({
         {children}
         <CookieBanner />
         <Analytics />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-KRPRVERCJW"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-KRPRVERCJW');
+          `}
+        </Script>
       </body>
     </html>
   )
 }
+
