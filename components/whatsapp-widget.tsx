@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
+import { trackWhatsAppClick } from "@/lib/analytics"
 
 export function WhatsAppWidget() {
   const [isVisible, setIsVisible] = useState(false)
@@ -17,6 +18,9 @@ export function WhatsAppWidget() {
   }, [])
 
   const handleWhatsAppClick = () => {
+    // Enviar evento de clique no WhatsApp para o Google Analytics
+    trackWhatsAppClick("widget_flutuante")
+
     const whatsappNumber = "5515996890947"
     const message = "Olá! Gostaria de saber mais sobre os serviços da GAO Contabilidade."
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`

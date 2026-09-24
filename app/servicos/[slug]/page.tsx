@@ -5,6 +5,7 @@ import { servicos } from "@/lib/data/servicos"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { CheckCircle2, ArrowRight } from "lucide-react"
+import { ServiceProposalCTA } from "@/components/service-proposal-cta"
 
 export function generateStaticParams() {
   return servicos.map((s) => ({
@@ -105,14 +106,7 @@ export default async function ServicoPage({ params }: { params: Promise<{ slug: 
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="text-3xl font-bold mb-6">Solicite uma proposta</h2>
           <p className="text-lg opacity-90 mb-8">Sem compromisso.</p>
-          <a
-            href="https://wa.me/5515996890947"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-block bg-[var(--color-gao-gold)] text-[#024D44] font-bold py-4 px-8 rounded-lg hover:bg-[var(--color-gao-gold)]/90 transition-colors shadow-lg"
-          >
-            Enviar proposta via WhatsApp
-          </a>
+          <ServiceProposalCTA serviceTitle={servico.title} />
         </div>
       </section>
 

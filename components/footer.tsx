@@ -1,6 +1,9 @@
+"use client"
+
 import { Instagram, Mail, Phone, Facebook } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { trackWhatsAppClick } from "@/lib/analytics"
 
 export function Footer() {
   return (
@@ -86,6 +89,7 @@ export function Footer() {
                 href="https://wa.me/5515996890947"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick("footer")}
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(37,211,102,0.4)] transition-all duration-300"
                 aria-label="WhatsApp"
               >

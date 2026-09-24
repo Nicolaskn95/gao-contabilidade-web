@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CheckCircle2, ArrowRight } from "lucide-react"
 import { useState } from "react"
+import { trackProposalSubmission } from "@/lib/analytics"
 
 export function ProposalSection() {
   const [formData, setFormData] = useState({
@@ -29,6 +30,9 @@ export function ProposalSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Enviar evento de conversão para o Google Analytics (generate_lead)
+    trackProposalSubmission("formulario_home_proposta")
 
     const whatsappNumber = "5515996890947"
     const message = `Olá! Gostaria de solicitar uma proposta de serviços contábeis.

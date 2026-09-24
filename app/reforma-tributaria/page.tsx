@@ -13,6 +13,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { CheckCircle2, ArrowRight, CircleDollarSign, TrendingDown, BookOpen, Search, Monitor, RefreshCw, ShieldCheck } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import { trackProposalSubmission } from "@/lib/analytics"
 
 export default function ReformaTributariaPage() {
   const [formData, setFormData] = useState({
@@ -56,6 +57,10 @@ export default function ReformaTributariaPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Enviar evento de conversão para o Google Analytics (generate_lead)
+    trackProposalSubmission("formulario_reforma_tributaria")
+
     const whatsappNumber = "5515996890947"
     const message = `Olá! Gostaria de uma avaliação sobre os impactos da Reforma Tributária na minha empresa.
 
