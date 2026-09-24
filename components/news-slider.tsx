@@ -44,27 +44,35 @@ export function NewsSlider({ news }: { news: NewsItem[] }) {
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return
-    const scrollAmount = direction === "left" ? -360 : 360
-    scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" })
+    const container = scrollRef.current
+    const cards = container.querySelectorAll<HTMLElement>(".group\\/card")
+    if (cards.length > 1) {
+      const cardDistance = cards[1].offsetLeft - cards[0].offsetLeft
+      const scrollAmount = direction === "left" ? -cardDistance : cardDistance
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" })
+    } else if (cards.length === 1) {
+      const scrollAmount = direction === "left" ? -cards[0].offsetWidth : cards[0].offsetWidth
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" })
+    }
   }
 
   return (
-    <div className="relative group/slider max-w-[1300px] mx-auto px-4 md:px-12">
+    <div className="relative group/slider max-w-[1300px] mx-auto px-0 sm:px-4 md:px-12">
       {/* Scroll Arrows */}
       <button
         onClick={() => scroll("left")}
         aria-label="Notícia Anterior"
-        className="absolute left-0 md:left-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-lg border border-border flex items-center justify-center text-[#024D44] hover:bg-[#024D44] hover:text-white transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+        className="absolute left-1 md:left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-white/95 shadow-lg border border-border flex items-center justify-center text-[#024D44] hover:bg-[#024D44] hover:text-white transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs"
       >
-        <ChevronLeft className="w-6 h-6" />
+        <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
       </button>
 
       <button
         onClick={() => scroll("right")}
         aria-label="Próxima Notícia"
-        className="absolute right-0 md:right-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-lg border border-border flex items-center justify-center text-[#024D44] hover:bg-[#024D44] hover:text-white transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+        className="absolute right-1 md:right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-white/95 shadow-lg border border-border flex items-center justify-center text-[#024D44] hover:bg-[#024D44] hover:text-white transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs"
       >
-        <ChevronRight className="w-6 h-6" />
+        <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
       </button>
 
       {/* Draggable & Scrollable Container */}
@@ -74,8 +82,8 @@ export function NewsSlider({ news }: { news: NewsItem[] }) {
         onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
-        className={`flex gap-6 overflow-x-auto py-6 px-2 scrollbar-none select-none ${
-          isDragging ? "cursor-grabbing" : "cursor-grab"
+        className={`flex gap-4 sm:gap-6 overflow-x-auto py-6 px-[calc(50%-140px)] sm:px-6 md:px-2 scrollbar-none select-none scroll-smooth ${
+          isDragging ? "cursor-grabbing snap-none" : "cursor-grab snap-x snap-mandatory"
         }`}
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
@@ -91,7 +99,7 @@ export function NewsSlider({ news }: { news: NewsItem[] }) {
           return (
             <div
               key={index}
-              className="w-[290px] sm:w-[320px] md:w-[350px] shrink-0 bg-white rounded-2xl border border-border/60 shadow-sm hover:shadow-xl hover:border-[#024D44]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden group/card"
+              className="w-[280px] sm:w-[320px] md:w-[350px] shrink-0 snap-center md:snap-start snap-always md:snap-normal bg-white rounded-2xl border border-border/60 shadow-sm hover:shadow-xl hover:border-[#024D44]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden group/card"
             >
               <div>
                 {/* Header Image or Decorative Placeholder */}
