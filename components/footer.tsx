@@ -3,6 +3,7 @@
 import { Instagram, Mail, Phone, Facebook } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { openCookieBanner } from "@/components/cookie-banner"
 
 export function Footer() {
   return (
@@ -131,6 +132,13 @@ export function Footer() {
             <Link href="/politica-de-cookies" className="hover:text-[var(--color-gao-gold)] transition-colors">
               Política de Cookies
             </Link>
+            <button
+              type="button"
+              onClick={openCookieBanner}
+              className="hover:text-[var(--color-gao-gold)] transition-colors cursor-pointer text-xs md:text-sm bg-transparent border-none p-0 text-inherit"
+            >
+              Gerenciar Cookies
+            </button>
             <Link href="/termos-de-uso" className="hover:text-[var(--color-gao-gold)] transition-colors">
               Termos de Uso
             </Link>

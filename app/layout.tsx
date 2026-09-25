@@ -41,6 +41,26 @@ export default function RootLayout({
         {children}
         <CookieBanner />
         <Analytics />
+        <Script id="google-consent-init" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            
+            var consent = null;
+            try {
+              consent = localStorage.getItem('gao_cookie_consent');
+            } catch(e) {}
+            var isGranted = consent === 'true';
+
+            gtag('consent', 'default', {
+              'analytics_storage': isGranted ? 'granted' : 'denied',
+              'ad_storage': isGranted ? 'granted' : 'denied',
+              'ad_user_data': isGranted ? 'granted' : 'denied',
+              'ad_personalization': isGranted ? 'granted' : 'denied',
+              'wait_for_update': 500
+            });
+          `}
+        </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-KRPRVERCJW"
           strategy="afterInteractive"
@@ -51,16 +71,26 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-KRPRVERCJW');
+            gtag('config', 'G-KRPRVERCJW', {
+              anonymize_ip: true
+            });
           `}
         </Script>
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
-            (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "yn4j4garoo");
+            (function(){
+              var consent = null;
+              try {
+                consent = localStorage.getItem('gao_cookie_consent');
+              } catch(e) {}
+              if (consent === 'true') {
+                (function(c,l,a,r,i,t,y){
+                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                })(window, document, "clarity", "script", "yn4j4garoo");
+              }
+            })();
           `}
         </Script>
       </body>
