@@ -62,7 +62,7 @@ export default function RootLayout({
           `}
         </Script>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-KRPRVERCJW"
+          src="https://www.googletagmanager.com/gtag/js?id=G-L214W52MEJ"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -71,7 +71,7 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-KRPRVERCJW', {
+            gtag('config', 'G-L214W52MEJ', {
               anonymize_ip: true
             });
           `}
