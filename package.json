@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "postbuild": "node -e \"const fs=require('fs'); if(fs.existsSync('public/.htaccess') && fs.existsSync('out')) fs.copyFileSync('public/.htaccess', 'out/.htaccess')\"",
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start"
